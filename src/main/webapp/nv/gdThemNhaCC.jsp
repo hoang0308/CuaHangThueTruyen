@@ -18,6 +18,8 @@
 		if(nhanVien == null){
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
+		if(request.getParameter("err") == "missValue"){
+		}
 	%>
     <div class="w-100 ">
         <h1 class="d-flex justify-content-center mt-5">THÊM MỚI NHÀ CUNG CẤP</h1>
