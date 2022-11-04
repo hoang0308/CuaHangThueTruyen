@@ -38,4 +38,26 @@ public class DauTruyenDAO extends DAO {
 		return listDauTruyen;
 	}
 	
+	public boolean luuDauTruyen(DauTruyen dauTruyen) {
+		String sqlThemNhaCC = "INSERT INTO cuahangthuetruyen.tbldautruyen (`ma`,"
+				+ " `tenTruyen`, `tacGia`, `soLuong`, `nhaXuatBan`, `namXuatBan`, `moTa`)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?);";
+		try {
+			PreparedStatement ps = con.prepareStatement(sqlThemNhaCC);
+			ps.setString(1, dauTruyen.getMa());
+			ps.setString(2, dauTruyen.getTenTruyen());
+			ps.setString(3, dauTruyen.getTacGia());
+			ps.setInt(4, 0);
+			ps.setString(5, dauTruyen.getNhaXuatBan());
+			ps.setInt(6, dauTruyen.getNamXuatBan());
+			ps.setString(7, dauTruyen.getMoTa());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class DauTruyen {
 	private String ma, tenTruyen, tacGia, nhaXuatBan, moTa;
 	private int soLuong, namXuatBan;
@@ -7,6 +9,16 @@ public class DauTruyen {
 	public DauTruyen() {
 	}
 	
+	public DauTruyen(String ma, String tenTruyen, String tacGia, String nhaXuatBan,
+			int namXuatBan, String moTa) {
+		this.ma = ma;
+		this.tenTruyen = tenTruyen;
+		this.tacGia = tacGia;
+		this.nhaXuatBan = nhaXuatBan;
+		this.namXuatBan = namXuatBan;
+		this.moTa = moTa;
+	}
+
 	public String getMa() {
 		return ma;
 	}
@@ -53,4 +65,16 @@ public class DauTruyen {
 		this.moTa = moTa;
 	}
 	
+	public static String getNextMaDauTruyen(ArrayList<DauTruyen> listDauTruyen) {
+		if(listDauTruyen != null) {
+			int length = listDauTruyen.size()-1;
+			if (length>=0) {
+				//set ma nhacc tiep theo
+				String[] maLastDauTruyen = listDauTruyen.get(length).getMa().split("_");
+				String maDauTruyen = maLastDauTruyen[0]+ "_" + (Integer.parseInt(maLastDauTruyen[1])+1);
+				return maDauTruyen;
+			}
+		}
+		return "DauTruyen_1";
+	}
 }

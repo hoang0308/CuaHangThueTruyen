@@ -83,13 +83,11 @@ public class NhaCC {
 	}
 	
 	public static String getNextMaNhaCC(ArrayList<NhaCC> listNhaCC) {
-		System.out.println(listNhaCC.size());
 		int length = listNhaCC.size()-1;
 		if (length>=0) {	
 			//set ma nhacc tiep theo
 			String[] maLastNhaCC = listNhaCC.get(length).getMa().split("_");
 			String maNhaCC = maLastNhaCC[0]+ "_" + (Integer.parseInt(maLastNhaCC[1])+1);
-			System.out.println(maNhaCC);
 			return maNhaCC;
 		}
 		return "NhaCC_1";

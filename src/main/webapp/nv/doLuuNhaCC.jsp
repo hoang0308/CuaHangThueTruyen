@@ -12,11 +12,10 @@
 		response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 	}
 	
-	// Get list dau truyen
+	// Get list nha cung cap
 	ArrayList<NhaCC> listNhaCC = (ArrayList<NhaCC>)session.getAttribute("listNhaCC");
 	// Get ma dau truyen tiep theo
-	String maNextNhaCC;
-	maNextNhaCC = NhaCC.getNextMaNhaCC(listNhaCC);
+	String maNextNhaCC = NhaCC.getNextMaNhaCC(listNhaCC);
 	// Get thong tin nha cung cap trong form
 	String nameNhaCC = (String)request.getParameter("nameNhaCC");
 	String emailNhaCC = (String)request.getParameter("emailNhaCC");

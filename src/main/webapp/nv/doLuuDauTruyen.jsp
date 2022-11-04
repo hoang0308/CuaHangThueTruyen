@@ -13,35 +13,22 @@
 	}
 	
 	// Get list dau truyen
-	ArrayList<NhaCC> listNhaCC = (ArrayList<NhaCC>)session.getAttribute("listNhaCC");
+	ArrayList<DauTruyen> listDauTruyen = (ArrayList<DauTruyen>)session.getAttribute("listDauTruyen");
 	// Get ma dau truyen tiep theo
-	String maNextNhaCC;
-	maNextNhaCC = NhaCC.getNextMaNhaCC(listNhaCC);
-	// Get thong tin nha cung cap trong form
-	String nameNhaCC = (String)request.getParameter("nameNhaCC");
-	String emailNhaCC = (String)request.getParameter("emailNhaCC");
-	String sdtNhaCC = (String)request.getParameter("sdtNhaCC");
-	String moTaNhaCC = (String)request.getParameter("moTaNhaCC");
-	String diaChiSoNha = (String)request.getParameter("diaChi_soNha");
-	String diaChiToaNha = (String)request.getParameter("diaChi_toaNha");
-	String diaChiXomPho = (String)request.getParameter("diaChi_xomPho");
-	String diaChiPhuongXa = (String)request.getParameter("diaChi_phuongXa");
-	String diaChiQuanHuyen = (String)request.getParameter("diaChi_quanHuyen");
-	String diaChiTinhThanh = (String)request.getParameter("diaChi_tinhThanh");
-	// Khai bao dia chi nha cung cap
-	DiaChi diaChiNhaCC = new DiaChi(diaChiSoNha, diaChiToaNha, diaChiXomPho,
-								diaChiPhuongXa, diaChiQuanHuyen, diaChiTinhThanh);
-	// Khai bao nha cung cap
-	NhaCC nhaCC = new NhaCC( maNextNhaCC, nameNhaCC,
-								emailNhaCC, sdtNhaCC,
-								moTaNhaCC, diaChiNhaCC);
-	NhaCCDAO nhaCCDAO = new NhaCCDAO();
+	String maNextDauTruyen = DauTruyen.getNextMaDauTruyen(listDauTruyen);
+	// Get thong tin dau truyen trong form
+	String tenTruyen = (String)request.getParameter("tenTruyen");
+	String tacGia = (String)request.getParameter("tacGia");
+	String nhaXuatBan = (String)request.getParameter("nhaXuatBan");
+	int namXuatBan = Integer.parseInt(request.getParameter("namXuatBan"));
+	String moTa = (String)request.getParameter("moTa");
+	// Khai bao dau truyen
+	DauTruyen dauTruyen = new DauTruyen(maNextDauTruyen, tenTruyen,
+			tacGia, nhaXuatBan, namXuatBan, moTa);
+	DauTruyenDAO dauTruyenDAO = new DauTruyenDAO();
 	// Luu nha cung cap
-	if(nhaCCDAO.luuNhaCC(nhaCC)){
-		session.setAttribute("nhaCC" , nhaCC);
-		HoaDonNhap hoaDonNhap = new HoaDonNhap();
-		hoaDonNhap.setNhaCC(nhaCC);
-		session.setAttribute("hoaDonNhap", hoaDonNhap);
+	if(dauTruyenDAO.luuDauTruyen(dauTruyen)){
+		session.setAttribute("dauTruyen" , dauTruyen);
 		response.sendRedirect("gdHoaDonNhap.jsp");
 	}
 	else{		

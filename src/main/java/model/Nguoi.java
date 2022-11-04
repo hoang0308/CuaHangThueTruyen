@@ -2,6 +2,7 @@ package model;
 
 public class Nguoi {
 	private int id;
+	private HoTen hoTen;
 	
 	public Nguoi() {
 	}
@@ -14,4 +15,10 @@ public class Nguoi {
 		this.id = id;
 	}
 	
+	public HoTen getHoTen() {
+		return hoTen;
+	}
+	public void setHoTen(HoTen hoTen) {
+		this.hoTen = hoTen;
+	}
 }

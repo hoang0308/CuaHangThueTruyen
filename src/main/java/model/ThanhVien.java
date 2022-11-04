@@ -2,7 +2,7 @@ package model;
 
 public class ThanhVien extends Nguoi {
 	private String username, password, vaiTro;
-	private HoTen hoTen;
+	
 
 	public ThanhVien() {
 	}
@@ -12,7 +12,7 @@ public class ThanhVien extends Nguoi {
 		this.username = username;
 		this.password = password;
 		this.vaiTro = vaiTro;
-		this.hoTen = hoTen;
+		super.setHoTen(hoTen);
 	}
 	
 	public String getUsername() {
@@ -33,10 +33,5 @@ public class ThanhVien extends Nguoi {
 	public void setVaiTro(String vaiTro) {
 		this.vaiTro = vaiTro;
 	}
-	public HoTen getHoTen() {
-		return hoTen;
-	}
-	public void setHoTen(HoTen hoTen) {
-		this.hoTen = hoTen;
-	}
+
 }
