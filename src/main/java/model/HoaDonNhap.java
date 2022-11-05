@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class HoaDonNhap {
 	private String ma;
@@ -8,7 +9,7 @@ public class HoaDonNhap {
 	private float tongTien;
 	private ThanhVien nhanVien;
 	private NhaCC nhaCC;
-	private DauTruyenHDNhap dauTruyenHDNhap;
+	private ArrayList<DauTruyenHDNhap> listTruyenNhap = new ArrayList<>();
 	private String moTa;
 	
 	public HoaDonNhap() {
@@ -62,13 +63,16 @@ public class HoaDonNhap {
 		this.moTa = moTa;
 	}
 
-	public DauTruyenHDNhap getDauTruyenHDNhap() {
-		return dauTruyenHDNhap;
+	public ArrayList<DauTruyenHDNhap> getListTruyenNhap() {
+		return listTruyenNhap;
 	}
 
-	public void setDauTruyenHDNhap(DauTruyenHDNhap dauTruyenHDNhap) {
-		this.dauTruyenHDNhap = dauTruyenHDNhap;
+	public void setListTruyenNhap(ArrayList<DauTruyenHDNhap> listTruyenNhap) {
+		this.listTruyenNhap = listTruyenNhap;
 	}
 	
+	public void addTruyenNhapToList(DauTruyenHDNhap truyenNhap) {
+		this.listTruyenNhap.add(truyenNhap);
+	}
 	
 }

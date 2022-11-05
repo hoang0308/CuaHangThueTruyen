@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class NhaCC {
 	private String ma, ten, email, sdt, moTa;
 	private DiaChi diaChi;
-	private static ArrayList<NhaCC> listNhaCCSearch;
 	
 	public NhaCC() {
 	}
@@ -73,7 +72,7 @@ public class NhaCC {
 	}
 	
 	public static ArrayList<NhaCC> getListNhaCCTheoTen(String nameNhaCC, ArrayList<NhaCC> listNhaCC){
-		listNhaCCSearch = new ArrayList<>();
+		ArrayList<NhaCC> listNhaCCSearch = new ArrayList<>();
 		for(NhaCC nhaCC : listNhaCC) {
 			if(nhaCC.getTen().toUpperCase().contains(nameNhaCC)) {
 				listNhaCCSearch.add(nhaCC);
@@ -95,9 +94,9 @@ public class NhaCC {
 	
 	public static NhaCC getNhaCCTheoMa(String maNhaCC, ArrayList<NhaCC> listNhaCC){
 		NhaCC nhaCC = new NhaCC();
-		for(NhaCC nhaCCtemp : listNhaCC) {
-			if(nhaCCtemp.getMa().equals(maNhaCC)) {
-				nhaCC = nhaCCtemp;
+		for(NhaCC nhaCCTemp : listNhaCC) {
+			if(nhaCCTemp.getMa().equals(maNhaCC)) {
+				nhaCC = nhaCCTemp;
 				break;
 			}
 		}

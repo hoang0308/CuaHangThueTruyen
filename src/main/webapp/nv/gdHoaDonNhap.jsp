@@ -16,6 +16,10 @@
     	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
     	crossorigin="anonymous"
     >
+    <script 
+    	type="text/javascript" 
+    	src="${pageContext.request.contextPath}/javascript/gdHoaDonNhap.js"
+    ></script>
 </head>
 <body>
 	<%
@@ -24,128 +28,157 @@
 		if(nhanVien == null){
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
-		String maNhaCC = request.getParameter("maNhaCC");
-		HoaDonNhap hoaDonNhap;
-		if(maNhaCC != null){
-			hoaDonNhap = new HoaDonNhap();
-			ArrayList<NhaCC> listNhaCC = (ArrayList<NhaCC>)session.getAttribute("listNhaCC");
-			NhaCC nhaCC = NhaCC.getNhaCCTheoMa(maNhaCC, listNhaCC);
-			hoaDonNhap.setNhaCC(nhaCC);
-		}
 		else{
-			hoaDonNhap = (HoaDonNhap)session.getAttribute("hoaDonNhap");
-		}
-		if(hoaDonNhap == null){
-			response.sendRedirect("gdDSNhaCC.jsp");
-		}
-		session.setAttribute("hoaDonNhap", hoaDonNhap);
+			String maNhaCC = request.getParameter("maNhaCC");
+			HoaDonNhap hoaDonNhap;
+			if(maNhaCC != null){
+				hoaDonNhap = new HoaDonNhap();
+				ArrayList<NhaCC> listNhaCC = (ArrayList<NhaCC>)session.getAttribute("listNhaCC");
+				NhaCC nhaCC = NhaCC.getNhaCCTheoMa(maNhaCC, listNhaCC);
+				hoaDonNhap.setNhaCC(nhaCC);
+			}
+			else{
+				hoaDonNhap = (HoaDonNhap)session.getAttribute("hoaDonNhap");
+			}
+			if(hoaDonNhap == null){
+				response.sendRedirect("gdDSNhaCC.jsp");
+			}
+			else{
+				session.setAttribute("hoaDonNhap", hoaDonNhap);
+				ArrayList<DauTruyenHDNhap> listTruyenNhap = hoaDonNhap.getListTruyenNhap();
 	%>
-	<div class="w-100 ">
-        <h1 class="d-flex justify-content-center mt-5">HÓA ĐƠN NHẬP TRUYỆN CHI TIẾT</h1>
-        <div class="justify-content-center mt-5">
-            <div class="justify-content-center container w-75 border rounded-3 px-5 py-4">
-            	<% if( hoaDonNhap != null) {%>
+		<div class="w-100 ">
+	        <h1 class="d-flex justify-content-center mt-5">HÓA ĐƠN NHẬP TRUYỆN CHI TIẾT</h1>
+	        <div class="justify-content-center mt-5">
+	            <div class="justify-content-center container w-75 border rounded-3 px-5 py-4">
+		                <div class="mb-3 row">
+		                    <label for="staticEmail" class="col-sm-4 col-form-label">Nhà cung cấp :</label>
+		                    <div class="col-sm-6">
+		                      <input 
+		                      	type="text" 
+		                      	readonly 
+		                      	class="form-control-plaintext border px-3 rounded-3" 
+		                      	value="<%= hoaDonNhap.getNhaCC().getTen() %>"
+		                      >
+		                    </div>
+		                </div>
+		                <div class="mb-3 row">
+		                    <label for="staticEmail" class="col-sm-4 col-form-label">Địa chỉ :</label>
+		                    <div class="col-sm-6">
+		                      <input 
+		                      	type="text" 
+		                      	readonly 
+		                      	class="form-control-plaintext border px-3 rounded-3" 
+		                      	value="<%= hoaDonNhap.getNhaCC().getDiaChi().toString() %>"
+		                      >
+		                    </div>
+		                </div>
 	                <div class="mb-3 row">
-	                    <label for="staticEmail" class="col-sm-4 col-form-label">Nhà cung cấp :</label>
+	                    <label for="staticEmail" class="col-sm-4 col-form-label">Nhân viên thanh toán :</label>
 	                    <div class="col-sm-6">
 	                      <input 
 	                      	type="text" 
 	                      	readonly 
 	                      	class="form-control-plaintext border px-3 rounded-3" 
-	                      	value="<%= hoaDonNhap.getNhaCC().getTen() %>"
+	                      	value="<%= nhanVien.getHoTen().toString() %>"
 	                      >
 	                    </div>
 	                </div>
 	                <div class="mb-3 row">
-	                    <label for="staticEmail" class="col-sm-4 col-form-label">Địa chỉ :</label>
+	                    <label for="staticEmail" class="col-sm-4 col-form-label">Thời gian thanh toán :</label>
 	                    <div class="col-sm-6">
 	                      <input 
 	                      	type="text" 
 	                      	readonly 
 	                      	class="form-control-plaintext border px-3 rounded-3" 
-	                      	value="<%= hoaDonNhap.getNhaCC().getDiaChi().toString() %>"
+	                      	value="<%= java.time.LocalDateTime.now() %>"
 	                      >
 	                    </div>
 	                </div>
-	            <% } %>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Nhân viên thanh toán :</label>
-                    <div class="col-sm-6">
-                      <input 
-                      	type="text" 
-                      	readonly 
-                      	class="form-control-plaintext border px-3 rounded-3" 
-                      	value="<%= nhanVien.getHoTen().toString() %>"
-                      >
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Thời gian thanh toán :</label>
-                    <div class="col-sm-6">
-                      <input 
-                      	type="text" 
-                      	readonly 
-                      	class="form-control-plaintext border px-3 rounded-3" 
-                      	value="<%= java.time.LocalDateTime.now() %>"
-                      >
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Danh sách đầu truyện nhập : </label>
-                    <div class="d-flex justify-content-center">
-                        <table class="table w-75 table-bordered mt-2">
-                            <thead class="">
-                              <tr class=""> 
-                                <th scope="col">Mã</th>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Đơn giá</th>
-                                <th scope="col">Số lượng</th>
-                                <th scope="col">Thành tiền</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            	<% if(hoaDonNhap.getDauTruyenHDNhap() != null){%>
-		                            <tr>
-			                            <th scope="row">1</th>
-			                            <td></td>
-			                            <td></td>
-			                            <td></td>
-			                            <td></td>
-		                            </tr>
-	                        	<%}%>
-                              <tr>
-                                <th scope="row" colspan="4">Tổng số tiền :</th>
-                                <td colspan="2"></td>
-                              </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center mt-5 mb-5">
-            <div class="col-2">
-                <button class="btn border w-100">In hóa đơn</button>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-2">
-              	<a
-            		class="btn border w-100"
-            		href="gdDSDauTruyen.jsp"
-            	>
-            		Thêm đầu truyện nhập
-            	</a>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-2">
-                <a
-            		class="btn border w-100"
-            		href="gdDSNhaCC.jsp"
-            	>
-            		Trở lại
-            	</a>
-            </div>
-        </div>
-    </div>
+	                <div class="mb-3 row">
+	                    <label for="staticEmail" class="col-sm-4 col-form-label">Danh sách đầu truyện nhập : </label>
+	                    <div class="d-flex justify-content-center">
+	                        <table class="table w-75 table-bordered mt-2">
+	                            <thead class="">
+	                              <tr class=""> 
+	                                <th scope="col">Mã</th>
+	                                <th scope="col">Tên</th>
+	                                <th scope="col">Đơn giá</th>
+	                                <th scope="col">Số lượng</th>
+	                                <th scope="col">Thành tiền</th>
+	                              </tr>
+	                            </thead>
+	                            <tbody>
+	                            	<% if(listTruyenNhap != null){ 
+											for(DauTruyenHDNhap truyenNhap : listTruyenNhap){
+												float donGia = truyenNhap.getDonGia();
+												int soLuong = truyenNhap.getSoLuong();
+	                            	%>
+			                            <tr>
+				                            <th scope="row">
+				                            	<%= truyenNhap.getDauTruyen().getMa() %>
+				                            </th>
+				                            <td>
+				                            	<%= truyenNhap.getDauTruyen().getTenTruyen() %>
+				                            </td>
+				                            <td>
+				                            	<%= donGia %>
+				                            </td>
+				                            <td>
+				                            	<%= soLuong %>
+				                            </td>
+				                            <td 
+				                            	class="js-thanhTien"
+				                            	data-thanhTien = "<%= donGia * soLuong %>"
+				                            >
+				                            	<%= donGia * soLuong %>
+				                            </td>
+			                            </tr>
+			                      	<% 
+											}
+										}
+									%>
+	                              <tr>
+	                                <th scope="row" colspan="4">Tổng số tiền :</th>
+	                                <td 
+	                                	colspan="2"
+	                                	class="js-tongTien"
+	                                >
+	                                </td>
+	                              </tr>
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="d-flex justify-content-center mt-5 mb-5">
+	            <div class="col-2">
+	                <button class="btn border w-100">In hóa đơn</button>
+	            </div>
+	            <div class="col-2"></div>
+	            <div class="col-2">
+	              	<a
+	            		class="btn border w-100"
+	            		href="gdDSDauTruyen.jsp"
+	            	>
+	            		Thêm đầu truyện nhập
+	            	</a>
+	            </div>
+	            <div class="col-2"></div>
+	            <div class="col-2">
+	                <a
+	            		class="btn border w-100"
+	            		href="gdDSNhaCC.jsp"
+	            	>
+	            		Trở lại
+	            	</a>
+	            </div>
+	        </div>
+	    </div>
+    <%	
+           	}
+		}
+    %>
 </body>
 </html>

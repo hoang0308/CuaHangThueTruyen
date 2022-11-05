@@ -65,6 +65,18 @@ public class DauTruyen {
 		this.moTa = moTa;
 	}
 	
+	public static ArrayList<DauTruyen> getListDauTruyenTheoTen(String nameDauTruyen, 
+			ArrayList<DauTruyen> listDauTruyen){
+		
+		ArrayList<DauTruyen> listDauTruyenSearch = new ArrayList<>();
+		for(DauTruyen dauTruyen : listDauTruyen) {
+			if(dauTruyen.getTenTruyen().toUpperCase().contains(nameDauTruyen)) {
+				listDauTruyenSearch.add(dauTruyen);
+			}
+		}
+		return listDauTruyenSearch;
+	}
+	
 	public static String getNextMaDauTruyen(ArrayList<DauTruyen> listDauTruyen) {
 		if(listDauTruyen != null) {
 			int length = listDauTruyen.size()-1;
@@ -76,5 +88,16 @@ public class DauTruyen {
 			}
 		}
 		return "DauTruyen_1";
+	}
+	
+	public static DauTruyen getDauTruyenTheoMa(String maDauTruyen, ArrayList<DauTruyen> listDauTruyen){
+		DauTruyen dauTruyen = new DauTruyen();
+		for(DauTruyen dauTruyenTemp : listDauTruyen) {
+			if(dauTruyenTemp.getMa().equals(maDauTruyen)) {
+				dauTruyen = dauTruyenTemp;
+				break;
+			}
+		}
+		return dauTruyen;
 	}
 }

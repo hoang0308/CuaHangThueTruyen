@@ -24,22 +24,25 @@
 		if(nhanVien == null){
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
+		else{
 	%>
-	
-	<div class="w-100 ">
-        <h1 class="d-flex justify-content-center mt-5">TRANG CHỦ NHÂN VIÊN</h1>
-        <div class="d-flex justify-content-center mt-5">
-            <ul class="list-unstyled">
-                <li class="mt-4">
-                	<a 
-                		class="btn btn-light border "
-                		href="gdDSNhaCC.jsp"
-                	>
-                		Nhập truyện
-                	</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+		<div class="w-100 ">
+	        <h1 class="d-flex justify-content-center mt-5">TRANG CHỦ NHÂN VIÊN</h1>
+	        <div class="d-flex justify-content-center mt-5">
+	            <ul class="list-unstyled">
+	                <li class="mt-4">
+	                	<a 
+	                		class="btn btn-light border "
+	                		href="gdDSNhaCC.jsp"
+	                	>
+	                		Nhập truyện
+	                	</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+    <%
+		}
+    %>
 </body>
 </html>

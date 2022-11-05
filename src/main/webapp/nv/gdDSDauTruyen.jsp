@@ -16,6 +16,8 @@
     	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
     	crossorigin="anonymous"
     >
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/index.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/javascript/gdDSDauTruyen.js"></script>
 </head>
 <body>
 	<%
@@ -24,124 +26,142 @@
 		if(nhanVien == null){
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
-		// Get list dau truyen
-		//DauTruyenDAO dauTruyenDAO = new DauTruyenDAO();
-		//ArrayList<DauTruyen> listDauTruyen = dauTruyenDAO.getListDauTruyen();
-		
-		// Get list dau truyen
-		ArrayList<DauTruyen> listDauTruyenShow;
-		ArrayList<DauTruyen> listDauTruyen;
-		boolean booleanSearchDauTruyen;
-		try{			
-			booleanSearchDauTruyen = (boolean)session.getAttribute("booleanSearchDauTruyen");
-		}
-		catch(Exception e){
-			booleanSearchDauTruyen = false;
-		}
-		//Nếu search thì sẽ lấy listNhaCC từ session, nếu không phải search thì sẽ lấy listNhaCC từ DB
-		if(booleanSearchDauTruyen){
-			//Nếu là search thì show listNhaCCSearch
-			listDauTruyen = (ArrayList<DauTruyen>)session.getAttribute("listDauTruyen");
-			listDauTruyenShow = (ArrayList<DauTruyen>)session.getAttribute("listDauTruyenSearch");
-		}
 		else{
-			//Nếu không là search thì show listNhaCC lấy từ DB
-			DauTruyenDAO dauTruyenDAO = new DauTruyenDAO();
-			listDauTruyen = dauTruyenDAO.getListDauTruyen();
-			listDauTruyenShow = listDauTruyen;
-		}
-		session.setAttribute("listDauTruyen", listDauTruyen);
-		session.removeAttribute("booleanSearchNhaCC");
-		
+			// Get list dau truyen
+			ArrayList<DauTruyen> listDauTruyenShow;
+			ArrayList<DauTruyen> listDauTruyen;
+			boolean booleanSearchDauTruyen;
+			try{			
+				booleanSearchDauTruyen = (boolean)session.getAttribute("booleanSearchDauTruyen");
+			}
+			catch(Exception e){
+				booleanSearchDauTruyen = false;
+			}
+			//Nếu search thì sẽ lấy listNhaCC từ session, nếu không phải search thì sẽ lấy listNhaCC từ DB
+			if(booleanSearchDauTruyen){
+				//Nếu là search thì show listNhaCCSearch
+				listDauTruyen = (ArrayList<DauTruyen>)session.getAttribute("listDauTruyen");
+				listDauTruyenShow = (ArrayList<DauTruyen>)session.getAttribute("listDauTruyenSearch");
+			}
+			else{
+				//Nếu không là search thì show listNhaCC lấy từ DB
+				DauTruyenDAO dauTruyenDAO = new DauTruyenDAO();
+				listDauTruyen = dauTruyenDAO.getListDauTruyen();
+				listDauTruyenShow = listDauTruyen;
+			}
+			session.setAttribute("listDauTruyen", listDauTruyen);
+			session.removeAttribute("booleanSearchDauTruyen");
+			session.setAttribute("boolAddTruyenNhap", true);
 	%>
-    <div class="w-100 ">
-        <h1 class="d-flex justify-content-center mt-5">DANH SÁCH ĐẦU TRUYỆN</h1>
-        <div class="d-flex justify-content-center mt-5">
-            <div class="col-6">
-                <input type="text" class="form-control" placeholder="Tên đầu truyện">
-            </div>
-            <div class="col-1"></div>
-            <div class="col-2">
-                <button class="btn btn-light border w-100">Tìm</button>
-            </div>
-        </div>
-        <div class="d-flex justify-content-center mt-5">
-            <table class="table w-75 table-bordered">
-                <thead class="">
-                  <tr class=""> 
-                    <th scope="col">Mã</th>
-                    <th scope="col">Tên</th>
-                    <th scope="col">Tác giả</th>
-                    <th scope="col">Số lượng</th>
-                    <th scope="col">Nhà xuất bản</th>
-                    <th scope="col">Năm xuất bản</th>
-                    <th scope="col">Mô tả</th>
-                  </tr>
-                </thead>
-                <tbody>
-               	<%
-               		if(listDauTruyen != null){
-               			int listLength =  listDauTruyen.size();
-               			for(DauTruyen dauTruyen : listDauTruyen) {
-               	%>
-               	<tr>
-	                <th>
-	                	<%= dauTruyen.getMa() %>
-	                </th>
-	                <td>
-	                	<%= dauTruyen.getTenTruyen() %>
-	                </td>
-	                <td>
-	                	<%= dauTruyen.getTacGia() %>
-	                </td>
-	                <td>
-	                	<%= dauTruyen.getSoLuong() %>
-	                </td>
-	                <td>
-	                	<%= dauTruyen.getNhaXuatBan() %>
-	                </td>
-	                <td>
-	                	<%= dauTruyen.getNamXuatBan() %>
-	                </td>
-	                <td>
-	                	<%= dauTruyen.getMoTa() %>
-	                </td>
-                </tr>
-            	<%
-               			}
-            		}
-            	%>
-                </tbody>
-            </table>
-        </div>
-        <div class="d-flex justify-content-center mt-5">
-            <div class="col-2">
-            	<a 
-            		class="btn border w-100"
-            		href="gdTruyenNhap.jsp"
-            	>
-            		Tiếp tục
-            	</a>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-2">
-            	<a 
-            		class="btn border w-100"
-            		href="gdThemDauTruyen.jsp"
-            	>
-            		Thêm mới đầu truyện
-            	</a>
-            </div>
-            <div class="col-1"></div>
-            <div class="col-2">
-            	<a 
-            		class="btn border w-100"
-            		href="gdHoaDonNhap.jsp"
-            	>
-            		Trở lại
-            	</a>
-            </div>
-        </div>
-    </div>
+	    <div class="w-100 ">
+	        <h1 class="d-flex justify-content-center mt-5">DANH SÁCH ĐẦU TRUYỆN</h1>
+	        <form name="searchDauTruyen" action="doSearchDauTruyen.jsp" method="post">
+				<div class="d-flex justify-content-center mt-5">
+					<div class="col-6">
+						<input 
+							type="text" 
+							class="form-control" 
+							name="nameDauTruyen" 
+							placeholder="Tên đầu truyện"
+						>
+					</div>
+					<div class="col-1"></div>
+					<div class="col-2">
+						<input 
+							type="submit" 
+							class="btn btn-light border w-100"
+							value="Tìm" 
+						/>
+					</div>
+				</div>
+			</form>
+	        <div class="d-flex justify-content-center mt-5">
+	            <table class="table w-75 table-bordered">
+	                <thead class="">
+	                  <tr class=""> 
+	                    <th scope="col">Mã</th>
+	                    <th scope="col">Tên</th>
+	                    <th scope="col">Tác giả</th>
+	                    <th scope="col">Số lượng</th>
+	                    <th scope="col">Nhà xuất bản</th>
+	                    <th scope="col">Năm xuất bản</th>
+	                    <th scope="col">Mô tả</th>
+	                    <th scope="col">Chọn</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	               	<%
+	               		if(listDauTruyen != null){
+	               			int listLength =  listDauTruyen.size();
+	               			for(DauTruyen dauTruyen : listDauTruyenShow) {
+	               	%>
+		               	<tr data-row-ma="<%= dauTruyen.getMa() %>">
+			                <th>
+			                	<%= dauTruyen.getMa() %>
+			                </th>
+			                <td>
+			                	<%= dauTruyen.getTenTruyen() %>
+			                </td>
+			                <td>
+			                	<%= dauTruyen.getTacGia() %>
+			                </td>
+			                <td>
+			                	<%= dauTruyen.getSoLuong() %>
+			                </td>
+			                <td>
+			                	<%= dauTruyen.getNhaXuatBan() %>
+			                </td>
+			                <td>
+			                	<%= dauTruyen.getNamXuatBan() %>
+			                </td>
+			                <td>
+			                	<%= dauTruyen.getMoTa() %>
+			                </td>
+			                <td>
+								<button
+									class="btn btn-primary border w-100 js-button-select"
+								>
+									Chọn
+								</button>
+							</td>
+		                </tr>
+	            	<%
+	            			}
+						}
+	            	%>
+	                </tbody>
+	            </table>
+	        </div>
+	        <div class="d-flex justify-content-center mt-5">
+	            <div class="col-2">
+	            	<button 
+	            		class="btn border w-100 js-tiep-tuc"
+	            	>
+	            		Tiếp tục
+	            	</button>
+	            </div>
+	            <div class="col-1"></div>
+	            <div class="col-2">
+	            	<a 
+	            		class="btn border w-100"
+	            		href="gdThemDauTruyen.jsp"
+	            	>
+	            		Thêm mới đầu truyện
+	            	</a>
+	            </div>
+	            <div class="col-1"></div>
+	            <div class="col-2">
+	            	<a 
+	            		class="btn border w-100"
+	            		href="gdHoaDonNhap.jsp"
+	            	>
+	            		Trở lại
+	            	</a>
+	            </div>
+	        </div>
+	    </div>
+    <%
+		}
+    %>
 </body>
 </html>

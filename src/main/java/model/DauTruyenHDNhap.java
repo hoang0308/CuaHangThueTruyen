@@ -3,9 +3,18 @@ package model;
 public class DauTruyenHDNhap {
 	private int id, soLuong;
 	private float donGia;
-	private String dauTruyenMa, hoaDonNhapMa;
+	private DauTruyen dauTruyen;
+	private HoaDonNhap hoaDonNhap;
 	
 	public DauTruyenHDNhap() {
+	}
+	
+	
+	public DauTruyenHDNhap(int soLuong, float donGia, DauTruyen dauTruyen, HoaDonNhap hoaDonNhap) {
+		this.soLuong = soLuong;
+		this.donGia = donGia;
+		this.dauTruyen = dauTruyen;
+		this.hoaDonNhap = hoaDonNhap;
 	}
 
 	public int getId() {
@@ -32,20 +41,25 @@ public class DauTruyenHDNhap {
 		this.donGia = donGia;
 	}
 
-	public String getDauTruyenMa() {
-		return dauTruyenMa;
+
+	public DauTruyen getDauTruyen() {
+		return dauTruyen;
 	}
 
-	public void setDauTruyenMa(String dauTruyenMa) {
-		this.dauTruyenMa = dauTruyenMa;
+
+	public void setDauTruyen(DauTruyen dauTruyen) {
+		this.dauTruyen = dauTruyen;
 	}
 
-	public String getHoaDonNhapMa() {
-		return hoaDonNhapMa;
+
+	public HoaDonNhap getHoaDonNhap() {
+		return hoaDonNhap;
 	}
 
-	public void setHoaDonNhapMa(String hoaDonNhapMa) {
-		this.hoaDonNhapMa = hoaDonNhapMa;
+
+	public void setHoaDonNhap(HoaDonNhap hoaDonNhap) {
+		this.hoaDonNhap = hoaDonNhap;
 	}
+	
 	
 }

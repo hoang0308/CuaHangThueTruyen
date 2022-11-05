@@ -24,8 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		else{
 			window.location=
-			`http://localhost:8080/CuaHangThueTruyen/nv/gdHoaDonNhap.jsp?maNhaCC=${rowSelect.dataset.rowMa}`;
+			`http://localhost:8080/CuaHangThueTruyen/nv/gdTruyenNhap.jsp?maDauTruyen=${rowSelect.dataset.rowMa}`;
 		}
 	});
-
 })
