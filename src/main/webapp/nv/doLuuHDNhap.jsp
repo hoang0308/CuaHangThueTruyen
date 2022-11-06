@@ -32,7 +32,7 @@
 			hoaDonNhap.setNhanVien(nhanVien);
 			if(hoaDonNhapDAO.luuHoaDonNhap(hoaDonNhap)){
 				session.removeAttribute("hoaDonNhap");
-				response.sendRedirect("gdChinhNV.jsp");
+				response.sendRedirect("gdChinhNV.jsp?status=saveSuccess");
 			}
 			else{		
 				%>

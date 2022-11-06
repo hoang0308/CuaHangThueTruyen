@@ -2,7 +2,6 @@ package model;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class HoaDonNhap {
 	private String ma;

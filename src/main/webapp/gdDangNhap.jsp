@@ -22,7 +22,7 @@
 		if(request.getParameter("err") !=null &&
 			request.getParameter("err").equalsIgnoreCase("timeout")){
 	%> 
-		<div class="alert alert-warning" role="alert">
+		<div class="alert alert-warning text-center" role="alert">
 			Hết phiên làm việc. Làm ơn đăng nhập lại!
 		</div>
 	<%

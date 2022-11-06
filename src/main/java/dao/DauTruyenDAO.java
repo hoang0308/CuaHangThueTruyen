@@ -41,11 +41,11 @@ public class DauTruyenDAO extends DAO {
 	}
 	
 	public boolean luuDauTruyen(DauTruyen dauTruyen) {
-		String sqlThemNhaCC = "INSERT INTO cuahangthuetruyen.tbldautruyen (`ma`,"
+		String sqlThemDauTruyen = "INSERT INTO cuahangthuetruyen.tbldautruyen (`ma`,"
 				+ " `tenTruyen`, `tacGia`, `soLuong`, `nhaXuatBan`, `namXuatBan`, `moTa`, `createAt`, `updateAt`)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
-			PreparedStatement ps = con.prepareStatement(sqlThemNhaCC);
+			PreparedStatement ps = con.prepareStatement(sqlThemDauTruyen);
 			ps.setString(1, dauTruyen.getMa());
 			ps.setString(2, dauTruyen.getTenTruyen());
 			ps.setString(3, dauTruyen.getTacGia());

@@ -47,7 +47,7 @@
 			if(nhaCCDAO.luuNhaCC(nhaCC)){
 				listNhaCC.add(nhaCC);
 				session.setAttribute("listNhaCC" , listNhaCC);
-				response.sendRedirect("gdHoaDonNhap.jsp?maNhaCC=" + nhaCC.getMa());
+				response.sendRedirect("gdHoaDonNhap.jsp?maNhaCC=" + nhaCC.getMa() + "&status=saveSuccess");
 			}
 			else{		
 				%>

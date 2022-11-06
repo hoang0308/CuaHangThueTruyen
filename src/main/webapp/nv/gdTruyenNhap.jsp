@@ -29,7 +29,17 @@
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
 		else{
+			String status = request.getParameter("status");
 			String maDauTruyen = request.getParameter("maDauTruyen");
+			if(maDauTruyen != null && status != null){
+				if(status.equals("saveSuccess")){	
+	%> 
+		<div class="alert alert-success text-center" role="alert">
+			Tạo mới đầu truyện thành công
+		</div>
+	<%
+				}
+			}
 			HoaDonNhap hoaDonNhap = (HoaDonNhap)session.getAttribute("hoaDonNhap");
 			DauTruyenHDNhapDAO dauTruyenHDNhap = new DauTruyenHDNhapDAO();
 			DauTruyen dauTruyen = new DauTruyen();

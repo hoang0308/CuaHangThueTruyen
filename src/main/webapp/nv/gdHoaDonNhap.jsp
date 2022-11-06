@@ -31,7 +31,16 @@
 		}
 		else{
 			String maNhaCC = request.getParameter("maNhaCC");
-			String message = request.getParameter("message");
+			String status = request.getParameter("status");
+			if(maNhaCC != null && status != null){
+				if(status.equals("saveSuccess")){	
+	%> 
+		<div class="alert alert-success text-center" role="alert">
+			Tạo mới nhà cung cấp thành công
+		</div>
+	<%
+				}
+			}
 			
 			HoaDonNhap hoaDonNhap;
 			if(maNhaCC != null){

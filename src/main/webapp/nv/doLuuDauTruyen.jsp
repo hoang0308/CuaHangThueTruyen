@@ -39,7 +39,7 @@
 				if(dauTruyenDAO.luuDauTruyen(dauTruyen)){
 					listDauTruyen.add(dauTruyen);
 					session.setAttribute("listDauTruyen", listDauTruyen);
-					response.sendRedirect("gdTruyenNhap.jsp?maDauTruyen=" + dauTruyen.getMa());
+					response.sendRedirect("gdTruyenNhap.jsp?maDauTruyen=" + dauTruyen.getMa() + "&status=saveSuccess");
 				}
 				else{		
 					%>

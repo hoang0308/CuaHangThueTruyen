@@ -7,16 +7,13 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import model.DauTruyenHDNhap;
-import model.DiaChi;
 import model.HoaDonNhap;
-import model.NhaCC;
 
 public class HoaDonNhapDAO extends DAO {
 	public ArrayList<HoaDonNhap> getListHDNhap(){
 		ArrayList<HoaDonNhap> listHDNhap = new ArrayList<>();
 		String sql = "SELECT * FROM cuahangthuetruyen.tblhoadonnhap\n"
 				+ "ORDER BY createAt";
-		System.out.println(sql);
 		PreparedStatement ps;
 	    try {
 	       ps = con.prepareStatement(sql);
@@ -35,11 +32,11 @@ public class HoaDonNhapDAO extends DAO {
 	
 	public boolean luuHoaDonNhap(HoaDonNhap hoaDonNhap) {
 		//luu hoa don nhap
-		String sqlThemNhaCC = "INSERT INTO cuahangthuetruyen.tblhoadonnhap (`ma`, `ngayThanhToan`,"
+		String sqlThemHoaDon = "INSERT INTO cuahangthuetruyen.tblhoadonnhap (`ma`, `ngayThanhToan`,"
 				+ " `tongTien`, `nhanVienNhapHDid`, `nhaCCma`, `moTa`, `createAt`, `updateAt`)"
 				+ " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
-			PreparedStatement ps = con.prepareStatement(sqlThemNhaCC);
+			PreparedStatement ps = con.prepareStatement(sqlThemHoaDon);
 			ps.setString(1, hoaDonNhap.getMa());
 			ps.setTimestamp(2, hoaDonNhap.getNgayThanhToan());
 			ps.setFloat(3, hoaDonNhap.getTongTien());
@@ -56,6 +53,10 @@ public class HoaDonNhapDAO extends DAO {
 		}
 		
 		ArrayList<DauTruyenHDNhap> listTruyenNhap = hoaDonNhap.getListTruyenNhap();
+		DauTruyenHDNhapDAO dauTruyenHDNhapDAO = new DauTruyenHDNhapDAO();
+		if(!dauTruyenHDNhapDAO.luuListDauTruyenHDNhap(listTruyenNhap)) {
+			return false;
+		}
 		
 		return true;
 	}

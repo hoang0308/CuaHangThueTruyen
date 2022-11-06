@@ -25,6 +25,16 @@
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
 		else{
+			String status = request.getParameter("status");
+			if(status != null){
+				if(status.equals("saveSuccess")){	
+	%> 
+		<div class="alert alert-success text-center" role="alert">
+			Tạo mới hóa đơn thành công
+		</div>
+	<%
+				}
+			}
 	%>
 		<div class="w-100 ">
 	        <h1 class="d-flex justify-content-center mt-5">TRANG CHỦ NHÂN VIÊN</h1>
