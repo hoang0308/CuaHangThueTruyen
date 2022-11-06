@@ -23,8 +23,6 @@
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
 		else{
-			if(request.getParameter("err") == "missValue"){
-			}
 	%>
 	    <div class="w-100 ">
 	        <h1 class="d-flex justify-content-center mt-5">THÊM MỚI NHÀ CUNG CẤP</h1>
@@ -38,7 +36,8 @@
 		                            <input 
 		                                type="text" 
 		                                name="nameNhaCC"
-		                                class="form-control-plaintext border px-3 rounded-3"  
+		                                class="form-control-plaintext border px-3 rounded-3"
+		                                required  
 		                                placeholder="Nhập tên của nhà cung cấp"
 		                            >
 		                        </div>
@@ -74,7 +73,8 @@
 											    <input
 											    	type="text"
 											    	name="diaChi_xomPho"
-											    	class="form-control" 
+											    	class="form-control"
+											    	required
 											    	placeholder="Nhập tên xóm/phố"
 											    >
 										    </div>
@@ -85,6 +85,7 @@
 											    	type="text"
 											    	name="diaChi_phuongXa"
 											    	class="form-control"
+											    	required
 											    	placeholder="Nhập tên phường/xã"
 											    >
 										    </div>
@@ -96,6 +97,7 @@
 												    type=""
 												    name="diaChi_quanHuyen"
 												    class="form-control" 
+												    required
 												    placeholder="Nhập tên quận/huyện"
 											    >
 										    </div>
@@ -106,6 +108,7 @@
 												    type="text"
 												    name="diaChi_tinhThanh"
 												    class="form-control" 
+												    required
 												    placeholder="Nhập tên tỉnh/thành"
 											    >
 										    </div>
@@ -120,6 +123,7 @@
 		                                type="text" 
 		                                name="emailNhaCC" 
 		                                class="form-control-plaintext border px-3 rounded-3" 
+		                                required
 		                                placeholder="Nhập email của nhà cung cấp"
 		                           	>
 		                        </div>
@@ -131,6 +135,7 @@
 		                                type="text" 
 		                                name="sdtNhaCC" 
 		                                class="form-control-plaintext border px-3 rounded-3" 
+		                                required
 		                                placeholder="Nhập số điện thoại của nhà cung cấp">
 		                        </div>
 		                    </div>

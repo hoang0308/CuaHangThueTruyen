@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 
 import model.DiaChi;
 
@@ -39,8 +40,8 @@ public class DiaChiDAO extends DAO {
 			return -1;
 		}
 		String sqlThemDiaChi = "INSERT INTO cuahangthuetruyen.tbldiachi (`soNha`,"
-				+ " `toaNha`, `xomPho`, `phuongXa`, `quanHuyen`, `tinhThanh`)"
-				+ " VALUES (?, ?, ?, ?, ?, ?);";
+				+ " `toaNha`, `xomPho`, `phuongXa`, `quanHuyen`, `tinhThanh`, `createAt`, `updateAt`)"
+				+ " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement ps = con.prepareStatement(sqlThemDiaChi,Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, diaChi.getSoNha());
@@ -49,6 +50,9 @@ public class DiaChiDAO extends DAO {
 			ps.setString(4, diaChi.getPhuongXa());
 			ps.setString(5, diaChi.getQuanHuyen());
 			ps.setString(6, diaChi.getTinhThanh());
+			Timestamp timeCreate = new Timestamp(System.currentTimeMillis());
+			ps.setTimestamp(7, timeCreate);
+			ps.setTimestamp(8, timeCreate);
 			ps.executeUpdate();
 			ResultSet generatedKeysResultSet = ps.getGeneratedKeys();
 			if (generatedKeysResultSet.next()) {

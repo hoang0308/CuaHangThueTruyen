@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		elementInput.addEventListener("input",() => {
 			let soLuong = elementSoLuong.value;
 			let donGia = elementDonGia.value;
-			elementThanhTien.value = soLuong * donGia;
+			elementThanhTien.value = (soLuong * donGia).toFixed(2);
 		})
 	}
 	setThanhTien(elementDonGia);

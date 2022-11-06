@@ -23,8 +23,6 @@
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
 		else{
-			if(request.getParameter("err") == "missValue"){
-			}
 	%>
 	    <div class="w-100 ">
 	        <h1 class="d-flex justify-content-center mt-5">THÊM MỚI ĐẦU TRUYỆN</h1>
@@ -39,6 +37,7 @@
 		                                type="text"
 		                                name="tenTruyen"
 		                                class="form-control-plaintext border px-3 rounded-3" 
+		                                required
 		                                placeholder="Nhập tên của đầu truyện"
 		                            >
 		                        </div>
@@ -55,6 +54,7 @@
 		                                type="text" 
 		                                name="tacGia"
 		                                class="form-control-plaintext border px-3 rounded-3" 
+		                                required
 		                                placeholder="Nhập tác giả của đầu truyện">
 		                        </div>
 		                    </div>
@@ -70,6 +70,7 @@
 		                                type="text" 
 		                                name="nhaXuatBan"
 		                                class="form-control-plaintext border px-3 rounded-3" 
+		                                required
 		                                placeholder="Nhập nhà xuất của đầu truyện">
 		                        </div>
 		                    </div>
@@ -85,6 +86,8 @@
 		                                type="number" 
 		                                name="namXuatBan"
 		                                class="form-control-plaintext border px-3 rounded-3" 
+		                                required
+		                                min="1"
 		                                placeholder="Nhập năm xuất bản của đầu truyện">
 		                        </div>
 		                    </div>
@@ -100,16 +103,17 @@
 		                                type="text" 
 		                                name="moTa"
 		                                class="form-control-plaintext border px-3 rounded-3" 
-		                                placeholder="Nhập mô tả đầu truyện">
+		                                placeholder="Nhập mô tả đầu truyện"
+		                            >
 		                        </div>
 		                    </div>
 		                    <div class="d-flex justify-content-center mt-5">
 					            <div class="col-2">
 					                <input 
-									type="submit" 
-									class="btn border w-100"
-									value="Tiếp tục" 
-								/>
+										type="submit" 
+										class="btn border w-100"
+										value="Tiếp tục" 
+									/>
 					            </div>
 					            <div class="col-4"></div>
 					            <div class="col-2">

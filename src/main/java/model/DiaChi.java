@@ -78,13 +78,13 @@ public class DiaChi {
 	@Override
 	public String toString() {
 		String result = "";
-		if(this.getSoNha() != null) {
+		if(!this.getSoNha().equals("")) {
 			result += this.getSoNha() + "-";
 		}
-		if(this.getToaNha() != null) {
+		if(!this.getToaNha().equals("")) {
 			result += this.getToaNha() + "-";
 		}
-		if(this.getXomPho() != null) {
+		if(!this.getXomPho().equals("")) {
 			result += this.getXomPho()+ "-";
 		}
 		result += this.getPhuongXa() + "-"

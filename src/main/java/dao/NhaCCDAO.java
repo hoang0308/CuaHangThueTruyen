@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import model.DiaChi;
@@ -15,7 +16,8 @@ public class NhaCCDAO extends DAO {
 	}
 	public ArrayList<NhaCC> getListNhaCC() {
 		listNhaCC = new ArrayList<NhaCC>();
-		String sql = "SELECT * FROM cuahangthuetruyen.tblnhacc";
+		String sql = "SELECT * FROM cuahangthuetruyen.tblnhacc\n"
+				+ "ORDER BY createAt";
 		PreparedStatement ps;
 	    try {
 	       ps = con.prepareStatement(sql);
@@ -50,8 +52,8 @@ public class NhaCCDAO extends DAO {
 		}
 		else {
 			String sqlThemNhaCC = "INSERT INTO cuahangthuetruyen.tblnhacc (`ma`,"
-					+ " `ten`, `email`, `sdt`, `tblDiaChiid`, `moTa`)"
-					+ " VALUES (?, ?, ?, ?, ?, ?);";
+					+ " `ten`, `email`, `sdt`, `tblDiaChiid`, `moTa`, `createAt`, `updateAt`)"
+					+ " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);";
 			try {
 				PreparedStatement ps = con.prepareStatement(sqlThemNhaCC);
 				ps.setString(1, nhaCC.getMa());
@@ -60,6 +62,9 @@ public class NhaCCDAO extends DAO {
 				ps.setString(4, nhaCC.getSdt());
 				ps.setInt(5, idDiaChi);
 				ps.setString(6, nhaCC.getMoTa());
+				Timestamp timeCreate = new Timestamp(System.currentTimeMillis());
+				ps.setTimestamp(7, timeCreate);
+				ps.setTimestamp(8, timeCreate);
 				ps.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();

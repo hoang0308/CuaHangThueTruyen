@@ -1,11 +1,12 @@
 package model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class HoaDonNhap {
 	private String ma;
-	private Date ngayThanhToan;
+	private Timestamp ngayThanhToan;
 	private float tongTien;
 	private ThanhVien nhanVien;
 	private NhaCC nhaCC;
@@ -23,11 +24,11 @@ public class HoaDonNhap {
 		this.ma = ma;
 	}
 
-	public Date getNgayThanhToan() {
+	public Timestamp getNgayThanhToan() {
 		return ngayThanhToan;
 	}
 
-	public void setNgayThanhToan(Date ngayThanhToan) {
+	public void setNgayThanhToan(Timestamp ngayThanhToan) {
 		this.ngayThanhToan = ngayThanhToan;
 	}
 
@@ -71,8 +72,19 @@ public class HoaDonNhap {
 		this.listTruyenNhap = listTruyenNhap;
 	}
 	
-	public void addTruyenNhapToList(DauTruyenHDNhap truyenNhap) {
-		this.listTruyenNhap.add(truyenNhap);
+	public void addTruyenNhapToList(DauTruyenHDNhap truyenNhapTemp) {
+		this.listTruyenNhap.add(truyenNhapTemp);
+	}
+	
+	public static String getNextMaHoaDonNhap(ArrayList<HoaDonNhap> listHoaDonNhap) {
+		int length = listHoaDonNhap.size()-1;
+		if (length>=0) {	
+			//set ma hoa don nhap tiep theo
+			String[] maLastHoaDonNhap = listHoaDonNhap.get(length).getMa().split("_");
+			String maHoaDonNhap = maLastHoaDonNhap[0]+ "_" + (Integer.parseInt(maLastHoaDonNhap[1])+1);
+			return maHoaDonNhap;
+		}
+		return "HoaDonNhap_1";
 	}
 	
 }

@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import model.DauTruyen;
@@ -15,7 +16,8 @@ public class DauTruyenDAO extends DAO {
 	
 	public ArrayList<DauTruyen> getListDauTruyen(){
 		listDauTruyen = new ArrayList<DauTruyen>();
-		String sql = "SELECT * FROM cuahangthuetruyen.tbldautruyen";
+		String sql = "SELECT * FROM cuahangthuetruyen.tbldautruyen\n"
+				+ "ORDER BY createAt";
 		PreparedStatement ps;
 	    try {
 	       ps = con.prepareStatement(sql);
@@ -40,8 +42,8 @@ public class DauTruyenDAO extends DAO {
 	
 	public boolean luuDauTruyen(DauTruyen dauTruyen) {
 		String sqlThemNhaCC = "INSERT INTO cuahangthuetruyen.tbldautruyen (`ma`,"
-				+ " `tenTruyen`, `tacGia`, `soLuong`, `nhaXuatBan`, `namXuatBan`, `moTa`)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?);";
+				+ " `tenTruyen`, `tacGia`, `soLuong`, `nhaXuatBan`, `namXuatBan`, `moTa`, `createAt`, `updateAt`)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		try {
 			PreparedStatement ps = con.prepareStatement(sqlThemNhaCC);
 			ps.setString(1, dauTruyen.getMa());
@@ -51,6 +53,9 @@ public class DauTruyenDAO extends DAO {
 			ps.setString(5, dauTruyen.getNhaXuatBan());
 			ps.setInt(6, dauTruyen.getNamXuatBan());
 			ps.setString(7, dauTruyen.getMoTa());
+			Timestamp timeCreate = new Timestamp(System.currentTimeMillis());
+			ps.setTimestamp(8, timeCreate);
+			ps.setTimestamp(9, timeCreate);
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

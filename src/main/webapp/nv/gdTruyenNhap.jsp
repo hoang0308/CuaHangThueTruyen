@@ -29,22 +29,24 @@
 			response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 		}
 		else{
-			if(request.getParameter("err") == "missValue"){
-			}
-			
 			String maDauTruyen = request.getParameter("maDauTruyen");
-			DauTruyenHDNhap dauTruyenHDNhap = new DauTruyenHDNhap();
+			HoaDonNhap hoaDonNhap = (HoaDonNhap)session.getAttribute("hoaDonNhap");
+			DauTruyenHDNhapDAO dauTruyenHDNhap = new DauTruyenHDNhapDAO();
+			DauTruyen dauTruyen = new DauTruyen();
 			if(maDauTruyen != null){
 				ArrayList<DauTruyen> listDauTruyen = 
 						(ArrayList<DauTruyen>)session.getAttribute("listDauTruyen");
-				DauTruyen dauTruyen = DauTruyen.getDauTruyenTheoMa(maDauTruyen, listDauTruyen);
-				HoaDonNhap hoaDonNhap = (HoaDonNhap)session.getAttribute("hoaDonNhap");
+				dauTruyen = DauTruyen.getDauTruyenTheoMa(maDauTruyen, listDauTruyen);
 				if(hoaDonNhap == null){
-					response.sendRedirect("gdNhaCC.jsp");
+					response.sendRedirect("gdDSNhaCC.jsp");
 				}
 				else{
 					session.setAttribute("dauTruyen", dauTruyen);
 				}
+			}
+			else{
+				response.sendRedirect("gdDSDauTruyen.jsp");
+			}
 	%>
 	    <div class="w-100 ">
 	        <h1 class="d-flex justify-content-center mt-5">THÔNG TIN TRUYỆN NHẬP</h1>
@@ -78,7 +80,7 @@
 	                                type="number" 
 	                                name="soLuong"
 	                                min="1"
-	                                required
+	                               	required
 	                                class="form-control-plaintext border px-3 rounded-3 js-soLuong" 
 	                                placeholder="Nhập số lượng của đầu truyện"
 	                                value="0"
@@ -96,12 +98,12 @@
 	                            <input 
 	                                type="number" 
 	                                name="donGia"
-	                                min="0.001"
-	                                step="0.001"
+	                                min="0.01"
+	                                step="0.01"
 	                                required
 	                                class="form-control-plaintext border px-3 rounded-3 js-donGia" 
 	                                placeholder="Nhập đơn giá của đầu truyện"
-	                                value="0"  
+	                                value="0.00"  
 	                           	>
 	                        </div>
 	                    </div>
@@ -117,7 +119,7 @@
 	                                type="number" 
 	                                readonly 
 	                                class="form-control-plaintext border px-3 rounded-3 js-thanhTien" 
-	                                value="0"
+	                                value="0.00"
 	                            >
 	                        </div>
 	                    </div>
@@ -144,10 +146,6 @@
             </div>
 	    </div>
     <%	
-			}
-			else{
-				response.sendRedirect("gdDSDauTruyen.jsp");
-			}
 		}
     %>
 </body>

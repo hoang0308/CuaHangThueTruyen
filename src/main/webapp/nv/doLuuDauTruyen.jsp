@@ -12,8 +12,8 @@
 		response.sendRedirect("../gdDangNhap.jsp?err=timeout");
 	}
 	else{
-		if((String)request.getParameter("namXuatBan") == ""){
-			response.sendRedirect("gdThemDauTruyen.jsp?err=missValue");
+		if(((String)request.getParameter("namXuatBan")).equals("")){
+			response.sendRedirect("gdThemDauTruyen.jsp");
 		}
 		else{
 			// Get thong tin dau truyen trong form
@@ -23,8 +23,8 @@
 			int namXuatBan = Integer.parseInt(request.getParameter("namXuatBan"));
 			String moTa = (String)request.getParameter("moTa");
 			
-			if(tenTruyen == "" || tacGia == "" || nhaXuatBan == ""){
-				response.sendRedirect("gdThemDauTruyen.jsp?err=missValue");
+			if(tenTruyen.equals("") || tacGia.equals("") || nhaXuatBan.equals("")){
+				response.sendRedirect("gdThemDauTruyen.jsp");
 			}
 			else{
 				// Get list dau truyen
@@ -37,7 +37,9 @@
 				DauTruyenDAO dauTruyenDAO = new DauTruyenDAO();
 				// Luu nha cung cap
 				if(dauTruyenDAO.luuDauTruyen(dauTruyen)){
-					response.sendRedirect("gdHoaDonNhap.jsp?maDauTruyen");
+					listDauTruyen.add(dauTruyen);
+					session.setAttribute("listDauTruyen", listDauTruyen);
+					response.sendRedirect("gdTruyenNhap.jsp?maDauTruyen=" + dauTruyen.getMa());
 				}
 				else{		
 					%>

@@ -28,10 +28,10 @@
 		String diaChiQuanHuyen = (String)request.getParameter("diaChi_quanHuyen");
 		String diaChiTinhThanh = (String)request.getParameter("diaChi_tinhThanh");
 		// check null value
-		if(nameNhaCC == "" || emailNhaCC == "" || sdtNhaCC == "" 
-			|| diaChiXomPho == "" || diaChiXomPho == ""
-			|| diaChiQuanHuyen == "" || diaChiTinhThanh == ""){
-			response.sendRedirect("gdThemNhaCC.jsp?err=missValue");
+		if(nameNhaCC.equals("") || emailNhaCC.equals("") || sdtNhaCC.equals("")
+			|| diaChiXomPho.equals("") || diaChiXomPho.equals("")
+			|| diaChiQuanHuyen.equals("") || diaChiTinhThanh.equals("")){
+			response.sendRedirect("gdThemNhaCC.jsp");
 		}
 		else{
 			
