@@ -31,7 +31,7 @@
 		response.sendRedirect("gdTruyenNhap.jsp?maDauTruyen=" + dauTruyen.getMa());
 	}
 	else{				
-		// Khai bao truyen muon
+		// Khai bao truyen nhap
 		int soLuong = Integer.parseInt(request.getParameter("soLuong"));
 		float donGia = Float.parseFloat(request.getParameter("donGia"));
 		DauTruyenHDNhap truyenNhap = new DauTruyenHDNhap(soLuong, donGia, dauTruyen, hoaDonNhap);

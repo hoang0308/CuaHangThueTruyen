@@ -72,8 +72,8 @@ public class DiaChiDAO extends DAO {
 			ps.setInt(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}
