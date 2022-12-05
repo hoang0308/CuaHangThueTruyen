@@ -10,27 +10,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-     <link 
-    	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-    	rel="stylesheet" 
-    	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-    	crossorigin="anonymous"
-    >
+    <link 
+	   	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+	   	rel="stylesheet" 
+	   	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+	   	crossorigin="anonymous"
+	>
 </head>
 <body>
 	<%
-		if(request.getParameter("err") !=null &&
-			request.getParameter("err").equalsIgnoreCase("timeout")){
+		String requestErr = request.getParameter("err");
+		if(requestErr != null &&
+				requestErr.equalsIgnoreCase("timeout")){
 	%> 
 		<div class="alert alert-warning text-center" role="alert">
 			Hết phiên làm việc. Làm ơn đăng nhập lại!
 		</div>
 	<%
-		}else if(request.getParameter("err") !=null &&
-			request.getParameter("err").equalsIgnoreCase("fail")){
+		}else if(requestErr != null &&
+				requestErr.equalsIgnoreCase("fail")){
 	%> 
 		<div class="alert alert-danger text-center" role="alert">
 			Sai tên đăng nhập/mật khẩu!
+		</div>
+	<%
+		}
+		boolean requestLogout = Boolean.parseBoolean(request.getParameter("logout"));
+		if(requestLogout){
+			session.invalidate();
+	%>
+		<div class="alert alert-success text-center" role="alert">
+			Đăng xuất thành công!
 		</div>
 	<%
 		}

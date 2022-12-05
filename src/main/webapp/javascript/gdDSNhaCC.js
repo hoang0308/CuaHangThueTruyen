@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const rows = document.querySelectorAll("tbody>tr");
 		let rowSelect = null;
 		rows.forEach((row) => {
-			if(row.getAttribute("class")?.includes("row-select")){
+			if(row.getAttribute("class") && row.getAttribute("class").includes("row-select")){
 				rowSelect = row;
 			}
 		})
